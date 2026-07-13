@@ -1,0 +1,56 @@
+<!-- STATE DERIVED FRONTEND-- STATE AND COMPOMENTS  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO APP</title>
+</head>
+<body>
+    <input placeholder="What things to do"/>
+    <button onclick="addTodo()">Add Todo!</button>
+    <button onclick="deleteLastTodo()">Delete Last todo!</button>
+    <button onclick="deletefirstTodo()">Delete first todo!</button>
+    <div class="todo"></div>
+</body>
+<script>
+    let todos=[];
+    function addTodo(){
+        todos.push({
+            title: document.querySelector("input").value
+        })
+        render();
+    }
+
+    function deleteLastTodo(){
+        todos.splice(todos.length-1, 1);
+        render();
+    }
+
+    function deletefirstTodo(){
+        todos.splice(0, 1);
+        render();
+    }
+
+    function createComponent(todo){
+         const div=document.createElement("div");
+            const button=document.createElement("button");
+            const h1=document.createElement("h1");
+            h1.innerHTML = todo.title;
+            button.innerHTML="DELETE!!";
+            div.append(h1);
+            div.append(button);
+            return div;
+    }
+
+    function render(){
+        document.querySelector(".todo").innerHTML="";
+        for(let i=0;i<todos.length;i++){
+            const todo = todos[i];
+            let div = createComponent(todo);
+            document.querySelector(".todo").appendChild(div);
+        }
+    }
+</script>
+</html>
