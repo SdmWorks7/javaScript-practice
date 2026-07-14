@@ -33,12 +33,18 @@
         render();
     }
 
-    function createComponent(todo){
+    function deleteCurrent(index){
+        todos.splice(index, 1);
+        render();
+    }
+
+    function createComponent(todo, index){
          const div=document.createElement("div");
             const button=document.createElement("button");
             const h1=document.createElement("h1");
             h1.innerHTML = todo.title;
             button.innerHTML="DELETE!!";
+            button.setAttribute("onclick", `deleteCurrent(${index})`);
             div.append(h1);
             div.append(button);
             return div;
@@ -48,7 +54,7 @@
         document.querySelector(".todo").innerHTML="";
         for(let i=0;i<todos.length;i++){
             const todo = todos[i];
-            let div = createComponent(todo);
+            let div = createComponent(todo, i);
             document.querySelector(".todo").appendChild(div);
         }
     }
